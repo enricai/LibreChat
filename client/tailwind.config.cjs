@@ -7,13 +7,9 @@ module.exports = {
   darkMode: ['class'],
   theme: {
     fontFamily: {
-      sans: ['Inter', 'sans-serif'],
-      mono: ['Roboto Mono', 'monospace'],
+      sans: ['ClashDisplay', 'sans-serif'],
+      mono: ['DMSans', 'sans-serif'],
     },
-    // fontFamily: {
-    //   sans: ['Söhne', 'sans-serif'],
-    //   mono: ['Söhne Mono', 'monospace'],
-    // },
     extend: {
       width: {
         authPageWidth: '370px',
@@ -63,6 +59,7 @@ module.exports = {
         },
         'brand-purple': '#ab68ff',
         'presentation': 'var(--presentation)',
+        'brand-orange': '#ff5810',
         'text-primary': 'var(--text-primary)',
         'text-secondary': 'var(--text-secondary)',
         'text-secondary-alt': 'var(--text-secondary-alt)',

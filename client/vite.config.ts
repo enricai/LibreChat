@@ -30,6 +30,7 @@ export default defineConfig(({ command }) => ({
     react(),
     nodePolyfills(),
     VitePWA({
+      includeManifestIcons: false,
       injectRegister: 'auto', // 'auto' | 'manual' | 'disabled'
       registerType: 'autoUpdate', // 'prompt' | 'autoUpdate'
       devOptions: {
@@ -52,8 +53,8 @@ export default defineConfig(({ command }) => ({
       },
       includeAssets: [],
       manifest: {
-        name: 'LibreChat',
-        short_name: 'LibreChat',
+        name: 'EnricChat',
+        short_name: 'EnricChat',
         start_url: '/',
         display: 'standalone',
         background_color: '#000000',
