@@ -306,208 +306,84 @@ html {
 }
 
 @font-face {
-  font-display: swap;
-  font-family: Inter;
+  font-family: "ClashDisplay";
+  src: url("$fonts/ClashDisplay-Light.ttf") format("truetype");
+  font-weight: 300;
   font-style: normal;
-  font-weight: 400;
-  src: url('$fonts/Inter-Regular.woff2') format('woff2');
-  size-adjust: 94%;
+  font-display: swap;
 }
 
 @font-face {
-  font-display: swap;
-  font-family: Inter;
-  font-style: italic;
+  font-family: "ClashDisplay";
+  src: url("$fonts/ClashDisplay-Regular.ttf") format("truetype");
   font-weight: 400;
-  src: url('$fonts/Inter-Italic.woff2') format('woff2');
-  size-adjust: 94%;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-  font-display: swap;
-  font-family: Inter;
-  font-style: normal;
+  font-family: "ClashDisplay";
+  src: url("$fonts/ClashDisplay-Medium.ttf") format("truetype");
   font-weight: 500;
-  src: url('$fonts/Inter-SemiBold.woff2') format('woff2');
-  size-adjust: 94%;
-}
-
-@font-face {
-  font-display: swap;
-  font-family: Inter;
-  font-style: italic;
-  font-weight: 500;
-  src: url('$fonts/Inter-SemiBoldItalic.woff2') format('woff2');
-  size-adjust: 94%;
-}
-
-@font-face {
-  font-display: swap;
-  font-family: Inter;
   font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ClashDisplay";
+  src: url("$fonts/ClashDisplay-Semibold.ttf") format("truetype");
   font-weight: 600;
-  src: url('$fonts/Inter-Bold.woff2') format('woff2');
-  size-adjust: 94%;
-}
-
-@font-face {
-  font-display: swap;
-  font-family: Inter;
-  font-style: italic;
-  font-weight: 600;
-  src: url('$fonts/Inter-BoldItalic.woff2') format('woff2');
-  size-adjust: 94%;
-}
-
-@font-face {
-  font-display: swap;
-  font-family: Roboto Mono;
   font-style: normal;
-  font-weight: 400;
-  src: url('$fonts/roboto-mono-latin-400-normal.woff2') format('woff2');
+  font-display: swap;
 }
 
 @font-face {
-  font-display: swap;
-  font-family: Roboto Mono;
-  font-style: normal;
+  font-family: "DMSans";
+  src: url("$fonts/DMSans-Bold.ttf") format("truetype");
   font-weight: 700;
-  src: url('$fonts/roboto-mono-latin-700-normal.woff2') format('woff2');
-}
-
-@font-face {
-  font-display: swap;
-  font-family: Roboto Mono;
-  font-style: italic;
-  font-weight: 400;
-  src: url('$fonts/roboto-mono-latin-400-italic.woff2') format('woff2');
-}
-
-/*
-
-The default ChatGPT fonts, according to OpenAI's brand guidelines, are proprietary and require appropriate font license according to your use case.
-
-They can be purchased here: https://klim.co.nz/buy/soehne/
-
-The fonts in question are (9 total):
-
-> - Söhne (Buch Kursiv, Buch, Halbfett Kursiv, Halbfett, Kraftig Kursiv, Kraftig, Mono Buch Kursiv, Mono Buch, Mono Halbfett)
-
-If you have purchased a license, you can use the commented-out `@font-face` declarations below to include them in your project.
-
-Step 1: Buy whatever license applies to you and allows use of `.woff2` font files (likely web font license).
-Step 2: Place them in ./client/public/fonts/ directory.
-Step 3: Replace the current `fontFamily` config in ./client/tailwind.config.cjs with the following:
-
-```
-    fontFamily: {
-      sans: ['Söhne', 'sans-serif'],
-      mono: ['Söhne Mono', 'monospace'],
-    },
-```
-
-Step 4: Uncomment all Söhne font-face declarations below.
-Step 5: rebuild frontend code: `npm run frontend` (or rebuild docker).
-
-*/
-
-/* @font-face {
-  font-display: swap;
-  font-family: Söhne;
   font-style: normal;
-  font-weight: 400;
-  src: url("$fonts/soehne-buch.woff2") format("woff2")
+  font-display: swap;
 }
 
 @font-face {
-  font-display: swap;
-  font-family: Söhne;
-  font-style: italic;
-  font-weight: 400;
-  src: url("$fonts/soehne-buch-kursiv.woff2") format("woff2")
-}
-
-@font-face {
-  font-display: swap;
-  font-family: Söhne;
-  font-style: normal;
-  font-weight: 500;
-  src: url("$fonts/soehne-kraftig.woff2") format("woff2")
-}
-
-@font-face {
-  font-display: swap;
-  font-family: Söhne;
-  font-style: italic;
-  font-weight: 500;
-  src: url("$fonts/soehne-kraftig-kursiv.woff2") format("woff2")
-}
-
-@font-face {
-  font-display: swap;
-  font-family: Söhne;
-  font-style: normal;
-  font-weight: 600;
-  src: url("$fonts/soehne-halbfett.woff2") format("woff2")
-}
-
-@font-face {
-  font-display: swap;
-  font-family: Söhne;
-  font-style: italic;
-  font-weight: 600;
-  src: url("$fonts/soehne-halbfett-kursiv.woff2") format("woff2")
-}
-
-@font-face {
-  font-display: swap;
-  font-family: Söhne Mono;
-  font-style: normal;
-  font-weight: 400;
-  src: url("$fonts/soehne-mono-buch.woff2") format("woff2")
-}
-
-@font-face {
-  font-display: swap;
-  font-family: Söhne Mono;
-  font-style: normal;
+  font-family: "DMSans";
+  src: url("$fonts/DMSans-BoldItalic.ttf") format("truetype");
   font-weight: 700;
-  src: url("$fonts/soehne-mono-halbfett.woff2") format("woff2")
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
+  font-family: "DMSans";
+  src: url("$fonts/DMSans-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
   font-display: swap;
-  font-family: Söhne Mono;
-  font-style: italic;
-  font-weight: 400;
-  src: url("$fonts/soehne-mono-buch-kursiv.woff2") format("woff2")
-} */
-
-/* * {
-  box-sizing: border-box;
-  outline: 1px solid limegreen !important;
-} */
-
-/* p small {
-  opacity: 0;
-  animation: fadeIn 3s ease forwards;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-} */
+@font-face {
+  font-family: "DMSans";
+  src: url("$fonts/DMSans-MediumItalic.ttf") format("truetype");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
 
-/* .LazyLoad {
-  opacity: 0;
-  transition: all 1s ease-in-out;
-} */
+@font-face {
+  font-family: "DMSans";
+  src: url("$fonts/DMSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DMSans";
+  src: url("$fonts/DMSans-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
 
 select {
   --tw-shadow: 0 0 transparent;
@@ -1235,13 +1111,7 @@ pre {
 
 code,
 pre {
-  font-family:
-    Consolas,
-    Söhne Mono,
-    Monaco,
-    Andale Mono,
-    Ubuntu Mono,
-    monospace !important;
+  font-family: ClashDisplay,DMSans,sans-serif;
 }
 code[class='language-plaintext'] {
   white-space: pre-line;
@@ -2058,17 +1928,7 @@ html {
   content: '⬤';
   width: 12px;
   height: 12px;
-  font-family:
-    system-ui,
-    Inter,
-    Söhne Circle,
-    -apple-system,
-    Segoe UI,
-    Roboto,
-    Ubuntu,
-    Cantarell,
-    Noto Sans,
-    sans-serif;
+  font-family: ClashDisplay,DMSans,sans-serif;
   line-height: normal;
   margin-left: 0.25rem;
   vertical-align: middle;
@@ -2078,17 +1938,7 @@ html {
 @supports (selector(:has(*))) {
   .result-streaming > :is(ul, ol):last-child > li:last-child:not(:has(> :is(ul, ol, pre))):after {
     content: '⬤';
-    font-family:
-      system-ui,
-      Inter,
-      Söhne Circle,
-      -apple-system,
-      Segoe UI,
-      Roboto,
-      Ubuntu,
-      Cantarell,
-      Noto Sans,
-      sans-serif;
+    font-family: ClashDisplay,DMSans,sans-serif;
     line-height: normal;
     margin-left: 0.25rem;
     vertical-align: middle;
@@ -2103,17 +1953,7 @@ html {
   .result-streaming > ol:last-child > li:last-child:after,
   .result-streaming > ul:last-child > li:last-child:after {
     content: '⬤';
-    font-family:
-      system-ui,
-      Inter,
-      Söhne Circle,
-      -apple-system,
-      Segoe UI,
-      Roboto,
-      Ubuntu,
-      Cantarell,
-      Noto Sans,
-      sans-serif;
+    font-family: ClashDisplay,DMSans,sans-serif;
     line-height: normal;
     margin-left: 0.25rem;
     vertical-align: middle;
