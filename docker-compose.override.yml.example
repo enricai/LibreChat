@@ -17,7 +17,7 @@
 #     - type: bind
 #       source: ./librechat.yaml
 #       target: /app/librechat.yaml
-#     image: ghcr.io/danny-avila/librechat:latest
+#     image: ghcr.io/enricai/librechat:latest
 
 # ---------------------------------------------------
 
@@ -39,19 +39,19 @@
 
 # # BUILD FROM LATEST IMAGE
 #   api:
-#     image: ghcr.io/danny-avila/librechat-dev:latest
+#     image: ghcr.io/enricai/librechat-dev:latest
  
 # # BUILD FROM LATEST IMAGE (NUMBERED RELEASE)
 #   api:
-#     image: ghcr.io/danny-avila/librechat:latest
+#     image: ghcr.io/enricai/librechat:latest
 
 # # BUILD FROM LATEST API IMAGE
 #   api:
-#     image: ghcr.io/danny-avila/librechat-dev-api:latest
+#     image: ghcr.io/enricai/librechat-dev-api:latest
 
 # # BUILD FROM LATEST API IMAGE (NUMBERED RELEASE)
 #   api:
-#     image: ghcr.io/danny-avila/librechat-api:latest
+#     image: ghcr.io/enricai/librechat-api:latest
 
 # # ADD MONGO-EXPRESS
 #   mongo-express:

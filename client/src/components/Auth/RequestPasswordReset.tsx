@@ -21,14 +21,13 @@ const BodyTextWrapper: FC<{ children: ReactNode }> = ({ children }) => {
 const ResetPasswordBodyText = () => {
   const localize = useLocalize();
   return (
-    <div className="flex flex-col space-y-4">
-      <p>{localize('com_auth_reset_password_if_email_exists')}</p>
-      <a
-        className="inline-flex text-sm font-medium text-green-600 transition-colors hover:text-green-700 dark:text-green-400 dark:hover:text-green-300"
-        href="/login"
-      >
-        {localize('com_auth_back_to_login')}
-      </a>
+    <div className="flex flex-col">
+      {localize('com_auth_reset_password_if_email_exists')}
+      <span>
+        <a className="text-sm text-primary hover:underline" href="/login">
+          {localize('com_auth_back_to_login')}
+        </a>
+      </span>
     </div>
   );
 };
@@ -53,7 +52,7 @@ function RequestPasswordReset() {
           setBodyText(
             <span>
               {localize('com_auth_click')}{' '}
-              <a className="text-green-500 hover:underline" href={data.link}>
+              <a className="text-primary hover:underline" href={data.link}>
                 {localize('com_auth_here')}
               </a>{' '}
               {localize('com_auth_to_reset_your_password')}
@@ -116,11 +115,10 @@ function RequestPasswordReset() {
           <label
             htmlFor="email"
             className="
-              absolute -top-2 left-2 z-10 bg-white px-2 text-sm text-gray-600
-              transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base
-              peer-placeholder-shown:text-gray-500 peer-focus:-top-2 peer-focus:text-sm
-              peer-focus:text-green-600 dark:bg-gray-900 dark:text-gray-400
-              dark:peer-focus:text-green-500
+            absolute start-3 top-1.5 z-10 origin-[0] -translate-y-4 scale-75 transform bg-surface-primary px-2 text-sm text-text-secondary-alt duration-200
+            peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100
+            peer-focus:top-1.5 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-primary
+            rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4
             "
           >
             {localize('com_auth_email_address')}
@@ -145,12 +143,11 @@ function RequestPasswordReset() {
         >
           {localize('com_auth_continue')}
         </button>
-        <a
-          href="/login"
-          className="block text-center text-sm font-medium text-green-600 transition-colors hover:text-green-700 dark:text-green-400 dark:hover:text-green-300"
-        >
-          {localize('com_auth_back_to_login')}
-        </a>
+        <div className="mt-4 flex justify-center">
+          <a href="/login" className="text-sm text-primary">
+            {localize('com_auth_back_to_login')}
+          </a>
+        </div>
       </div>
     </form>
   );

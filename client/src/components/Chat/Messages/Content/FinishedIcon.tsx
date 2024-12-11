@@ -1,7 +1,7 @@
 export default function FinishedIcon() {
   return (
     <div
-      className="absolute left-0 top-0 flex h-full w-full items-center justify-center rounded-full bg-brand-purple text-white"
+      className="absolute left-0 top-0 flex h-full w-full items-center justify-center rounded-full bg-brand-orange text-white"
       style={{ opacity: 1, transform: 'none' }}
       data-projection-id="162"
     >

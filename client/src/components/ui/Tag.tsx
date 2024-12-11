@@ -19,7 +19,7 @@ const TagPrimitiveRoot = React.forwardRef<HTMLDivElement, TagProps>(
       ref={ref}
       {...props}
       className={cn(
-        'flex max-h-8 items-center overflow-y-hidden rounded-3xl border-2 border-green-600 bg-green-600/20 text-xs text-green-600 dark:text-white',
+        'flex max-h-8 items-center overflow-y-hidden rounded-3xl border-2 border-green-600 bg-green-600/20 text-xs text-secondary dark:text-white',
         className,
       )}
     >

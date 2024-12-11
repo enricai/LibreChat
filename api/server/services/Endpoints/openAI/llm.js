@@ -60,14 +60,16 @@ function getLLMConfig(apiKey, options = {}) {
 
   // Handle OpenRouter or custom reverse proxy
   if (useOpenRouter || reverseProxyUrl === 'https://openrouter.ai/api/v1') {
-    configOptions.baseURL = 'https://openrouter.ai/api/v1';
-    configOptions.defaultHeaders = Object.assign(
-      {
-        'HTTP-Referer': 'https://librechat.ai',
-        'X-Title': 'LibreChat',
-      },
-      headers,
-    );
+    configOptions.basePath = 'https://openrouter.ai/api/v1';
+    configOptions.baseOptions = {
+      headers: Object.assign(
+        {
+          'HTTP-Referer': 'https://librechat.ai',
+          'X-Title': 'EnricChat',
+        },
+        headers,
+      ),
+    };
   } else if (reverseProxyUrl) {
     configOptions.baseURL = reverseProxyUrl;
     if (headers) {
