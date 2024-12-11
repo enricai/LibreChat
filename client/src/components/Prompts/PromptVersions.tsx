@@ -150,12 +150,11 @@ const PromptVersions = ({
 
   return (
     <section className="my-6" aria-label="Prompt Versions">
-      <header className="mb-6">
-        <h2 className="flex items-center gap-2 text-base font-semibold text-text-primary">
-          <Layers3 className="h-5 w-5 text-green-500" />
-          {localize('com_ui_versions')}
-        </h2>
-      </header>
+      <h2 className="mb-4 flex gap-2 text-base font-semibold dark:text-gray-200">
+        <Layers3 className="icon-lg text-primary" />
+        {localize('com_ui_versions')}
+      </h2>
+      <ul className="flex flex-col gap-3">
 
       <div className="flex flex-col gap-3" role="tablist" aria-label="Version history">
         {prompts.map((prompt: TPrompt, index: number) => {
