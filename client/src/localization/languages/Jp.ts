@@ -192,7 +192,7 @@ export default {
   com_ui_entries: 'エントリー',
   com_ui_pay_per_call: 'すべてのAIモデルを1つの場所で。支払いは使った分だけ',
   com_ui_new_footer: 'すべてのAIモデルを1つの場所で。',
-  com_ui_latest_footer: 'Every AI for Everyone.',
+  com_ui_latest_footer: 'AI for Humanity.',
   com_ui_enter: '入力',
   com_ui_submit: '送信する',
   com_ui_none_selected: '選択されていません',

@@ -1,11 +1,10 @@
-version: "3.8"
 services:
   api:
-    # build:
-    #   context: .
-    #   dockerfile: Dockerfile.multi
-    #   target: api-build
-    image: ghcr.io/danny-avila/librechat-dev-api:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.multi
+      target: api-build
+    image: api-build
     container_name: LibreChat-API
     ports:
       - 3080:3080
@@ -30,13 +29,11 @@ services:
         target: /app/librechat.yaml
       - ./images:/app/client/public/images
       - ./logs:/app/api/logs
-
   client:
     image: nginx:1.27.0-alpine
     container_name: LibreChat-NGINX
     ports:
       - 80:80
-      - 443:443
     depends_on:
       - api
     restart: always

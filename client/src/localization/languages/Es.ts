@@ -808,7 +808,7 @@ export default {
   com_ui_upload_invalid:
     'Archivo no válido para subir. Debe ser una imagen que no exceda el límite',
 
-  com_ui_latest_footer: 'IA para todos.',
+  com_ui_latest_footer: 'IA para la Humanidad.',
 
   com_ui_renaming_var: 'Renombrando "{0}"',
 
