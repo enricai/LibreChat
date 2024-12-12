@@ -11,9 +11,9 @@ services:
     depends_on:
       - mongodb
       - rag_api
-    restart: always
     extra_hosts:
     - "host.docker.internal:host-gateway"
+    restart: always
     env_file:
       - .env
     environment:
@@ -75,9 +75,9 @@ services:
   meilisearch:
     container_name: ai.enric.chat.meilisearch
     image: getmeili/meilisearch:v1.7.3
-    restart: always
     # ports: # Uncomment this to access meilisearch from outside docker
     #   - 7700:7700 # if exposing these ports, make sure your master key is not the default value
+    restart: always
     env_file:
       - .env
     environment:
@@ -96,11 +96,13 @@ services:
   vectordb:
     container_name: ai.enric.chat.pgvector
     image: ankane/pgvector:latest
-    environment:
-      POSTGRES_DB: mydatabase
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypassword
     restart: always
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_DB
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
     volumes:
       - pgdata2:/var/lib/postgresql/data
     labels:
@@ -111,17 +113,20 @@ services:
           "env:production"
         ]
       }]'
+    # ports:
+    #   - 5432:5432
   rag_api:
     container_name: ai.enric.chat.rag-api
     image: ghcr.io/danny-avila/librechat-rag-api-dev-lite:latest
-    environment:
-      - DB_HOST=vectordb
-      - RAG_PORT=${RAG_PORT:-8000}
     restart: always
-    depends_on:
-      - vectordb
     env_file:
       - .env
+    environment:
+      - DB_HOST=vectordb
+      - DB_PORT=${DB_PORT:-5432}
+      - RAG_PORT=${RAG_PORT:-8000}
+    depends_on:
+      - vectordb
     labels:
       com.datadoghq.ad.logs: '[{
         "source": "ai.enric.chat",
@@ -130,6 +135,8 @@ services:
           "env:production"
         ]
       }]'
+    # ports:
+    #   - 8000:8000
   datadog:
     container_name: datadog-agent
     image: gcr.io/datadoghq/agent:latest
