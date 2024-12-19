@@ -139,10 +139,11 @@ const updateAssistant = async ({ req, openai, assistant_id, updateData }) => {
   }
 
   if (hasFileSearch && !updateData.tool_resources?.file_search) {
+    const vectorStore = await openai.beta.assistants.vector_store.create(assistant_id);
     updateData.tool_resources = {
       ...(updateData.tool_resources ?? {}),
       file_search: {
-        vector_store_ids: [],
+        vector_store_ids: [vectorStore.id],
       },
     };
   }
@@ -175,10 +176,26 @@ const updateAssistant = async ({ req, openai, assistant_id, updateData }) => {
 const addResourceFileId = async ({ req, openai, assistant_id, tool_resource, file_id }) => {
   const assistant = await openai.beta.assistants.retrieve(assistant_id);
   const { tool_resources = {} } = assistant;
+  const isFileSearch = tool_resource === ToolCallTypes.FILE_SEARCH;
+  if (isFileSearch) {
+    const vectorStore = await openai.beta.assistants.vector_store.create(assistant_id);
+    await openai.beta.assistants.vector_store.files.create(vectorStore.id, { file_id });
+    file_id = vectorStore.id;
+  }
+
   if (tool_resources[tool_resource]) {
-    tool_resources[tool_resource].file_ids.push(file_id);
+    if (isFileSearch) {
+      // only one vectordb per assistant is needed
+      tool_resources[tool_resource] = { vector_store_ids: [file_id] };
+    } else {
+      tool_resources[tool_resource].file_ids.push(file_id);
+    }
   } else {
-    tool_resources[tool_resource] = { file_ids: [file_id] };
+    if (isFileSearch) {
+      tool_resources[tool_resource] = { vector_store_ids: [file_id] };
+    } else {
+      tool_resources[tool_resource] = { file_ids: [file_id] };
+    }
   }
 
   delete assistant.id;
@@ -204,7 +221,14 @@ const addResourceFileId = async ({ req, openai, assistant_id, tool_resource, fil
 const deleteResourceFileId = async ({ req, openai, assistant_id, tool_resource, file_id }) => {
   const assistant = await openai.beta.assistants.retrieve(assistant_id);
   const { tool_resources = {} } = assistant;
+  const isFileSearch = tool_resource === ToolCallTypes.FILE_SEARCH;
+  if (isFileSearch) {
+    const vectorStore = await openai.beta.assistants.vector_store.create(assistant_id);
+    await openai.beta.assistants.vector_store.files.del(vectorStore.id, { file_id });
+  }
 
+  // only one vectordb per assistant is needed, no need to delete it once it's
+  // created since it's OK to have a vector db with no docs
   if (tool_resource && tool_resources[tool_resource]) {
     const resource = tool_resources[tool_resource];
     const index = resource.file_ids.indexOf(file_id);
