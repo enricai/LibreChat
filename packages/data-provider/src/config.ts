@@ -186,7 +186,7 @@ export enum AgentCapabilities {
 
 export const defaultAssistantsVersion = {
   [EModelEndpoint.assistants]: 2,
-  [EModelEndpoint.azureAssistants]: 1,
+  [EModelEndpoint.azureAssistants]: 2,
 };
 
 export const baseEndpointSchema = z.object({
@@ -1038,7 +1038,15 @@ export const initialModelsConfig: TModelsConfig = {
   [EModelEndpoint.bedrock]: defaultModels[EModelEndpoint.bedrock],
 };
 
-export const EndpointURLs = {
+export const EndpointURLs: { [key in EModelEndpoint]: string } = {
+  [EModelEndpoint.openAI]: `/api/ask/${EModelEndpoint.openAI}`,
+  [EModelEndpoint.google]: `/api/ask/${EModelEndpoint.google}`,
+  [EModelEndpoint.custom]: `/api/ask/${EModelEndpoint.custom}`,
+  [EModelEndpoint.anthropic]: `/api/ask/${EModelEndpoint.anthropic}`,
+  [EModelEndpoint.gptPlugins]: `/api/ask/${EModelEndpoint.gptPlugins}`,
+  [EModelEndpoint.azureOpenAI]: `/api/ask/${EModelEndpoint.azureOpenAI}`,
+  [EModelEndpoint.chatGPTBrowser]: `/api/ask/${EModelEndpoint.chatGPTBrowser}`,
+  [EModelEndpoint.azureAssistants]: '/api/assistants/v2/chat',
   [EModelEndpoint.assistants]: '/api/assistants/v2/chat',
   [EModelEndpoint.azureAssistants]: '/api/assistants/v1/chat',
   [EModelEndpoint.agents]: `/api/${EModelEndpoint.agents}/chat`,
