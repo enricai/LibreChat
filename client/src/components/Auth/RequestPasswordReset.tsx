@@ -44,7 +44,6 @@ function RequestPasswordReset() {
   const { startupConfig, setHeaderText } = useOutletContext<TLoginLayoutContext>();
 
   const requestPasswordReset = useRequestPasswordResetMutation();
-  const { isLoading } = requestPasswordReset;
 
   const onSubmit = (data: TRequestPasswordReset) => {
     requestPasswordReset.mutate(data, {
@@ -128,14 +127,17 @@ function RequestPasswordReset() {
         )}
       </div>
       <div className="space-y-4">
-        <Button
-          aria-label="Continue with password reset"
+        <button
           type="submit"
-          disabled={!!errors.email || isLoading}
-          variant="submit"
-          className="h-12 w-full rounded-2xl"
+          disabled={!!errors.email}
+          className="
+            w-full rounded-2xl bg-green-600 px-4 py-3 text-sm font-medium text-white
+            transition-colors hover:bg-green-700 focus:outline-none focus:ring-2
+            focus:ring-green-500 focus:ring-offset-2 disabled:opacity-50
+            disabled:hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700
+          "
         >
-          {isLoading ? <Spinner /> : localize('com_auth_continue')}
+         {localize('com_auth_continue')}
         </button>
         <div className="mt-4 flex justify-center">
           <a href="/login" className="text-sm text-primary">
