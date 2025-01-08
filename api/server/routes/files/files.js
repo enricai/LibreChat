@@ -236,6 +236,20 @@ router.delete('/', async (req, res) => {
       await processDeleteRequest({ req, files: assistantFiles });
       res.status(200).json({ message: 'File associations removed successfully from assistant' });
       return;
+    }
+
+    /* Handle assistant unlinking even if no valid files to delete */
+    if (req.body.assistant_id && req.body.tool_resource && dbFiles.length === 0) {
+      const assistant = await getAssistant({
+        id: req.body.assistant_id,
+      });
+
+      const toolResourceFiles = assistant.tool_resources?.[req.body.tool_resource]?.file_ids ?? [];
+      const assistantFiles = files.filter((f) => toolResourceFiles.includes(f.file_id));
+
+      await processDeleteRequest({ req, files: assistantFiles });
+      res.status(200).json({ message: 'File associations removed successfully from assistant' });
+      return;
     } else if (
       req.body.assistant_id &&
       req.body.files?.[0]?.filepath === EModelEndpoint.azureAssistants
