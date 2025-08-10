@@ -310,7 +310,7 @@ export const anthropicSettings = {
     default: false as const,
   },
   thinking: {
-    default: false as const,
+    default: true as const,
   },
   thinkingBudget: {
     min: 1024 as const,
