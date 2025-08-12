@@ -298,19 +298,19 @@ const DEFAULT_MAX_OUTPUT = 8192 as const;
 const LEGACY_ANTHROPIC_MAX_OUTPUT = 4096 as const;
 export const anthropicSettings = {
   model: {
-    default: 'claude-3-5-sonnet-latest' as const,
+    default: 'claude-4-sonnet-latest' as const,
   },
   temperature: {
     min: 0 as const,
     max: 1 as const,
     step: 0.01 as const,
-    default: 1 as const,
+    default: 0 as const,
   },
   promptCache: {
-    default: true as const,
+    default: false as const,
   },
   thinking: {
-    default: true as const,
+    default: false as const,
   },
   thinkingBudget: {
     min: 1024 as const,
@@ -368,7 +368,7 @@ export const anthropicSettings = {
     },
   },
   web_search: {
-    default: false as const,
+    default: true as const,
   },
 };
 
