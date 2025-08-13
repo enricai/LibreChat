@@ -263,6 +263,19 @@ const openAIParams: Record<string, SettingDefinition> = {
     showDefault: false,
     columnSpan: 2,
   },
+  artifacts: {
+    key: 'artifacts',
+    label: 'com_nav_code_artifacts',
+    labelCode: true,
+    description: 'com_nav_info_code_artifacts',
+    descriptionCode: true,
+    type: 'boolean',
+    default: true,
+    component: 'switch',
+    optionType: 'conversation',
+    showDefault: false,
+    columnSpan: 2,
+  },
   reasoning_summary: {
     key: 'reasoning_summary',
     label: 'com_endpoint_reasoning_summary',
@@ -702,6 +715,7 @@ const anthropicConfig: SettingsConfiguration = [
   anthropic.thinking,
   anthropic.thinkingBudget,
   anthropic.web_search,
+  anthropic.artifacts,
 ];
 
 const anthropicCol1: SettingsConfiguration = [
@@ -721,6 +735,7 @@ const anthropicCol2: SettingsConfiguration = [
   anthropic.thinking,
   anthropic.thinkingBudget,
   anthropic.web_search,
+  anthropic.artifacts,
 ];
 
 const bedrockAnthropic: SettingsConfiguration = [
