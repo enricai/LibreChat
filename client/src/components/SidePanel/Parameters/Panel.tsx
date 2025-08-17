@@ -44,7 +44,7 @@ export default function Parameters() {
     const defaultParams = paramSettings[combinedKey] ?? paramSettings[overriddenEndpointKey] ?? [];
     const overriddenParams = endpointsConfig[provider]?.customParams?.paramDefinitions ?? [];
     const overriddenParamsMap = keyBy(overriddenParams, 'key');
-    return defaultParams.map(
+    return defaultParams.filter(param => param != null).map(
       (param) => (overriddenParamsMap[param.key] as SettingDefinition) ?? param,
     );
   }, [endpointType, endpointsConfig, model, provider]);
@@ -63,7 +63,7 @@ export default function Parameters() {
     //     return setting.key;
     //   }),
     // );
-    const paramKeys = new Set(parameters.map((setting) => setting.key));
+    const paramKeys = new Set(parameters.filter(setting => setting != null).map((setting) => setting.key));
     setConversation((prev) => {
       if (!prev) {
         return prev;
