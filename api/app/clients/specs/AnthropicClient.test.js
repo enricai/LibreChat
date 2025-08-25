@@ -328,6 +328,49 @@ describe('AnthropicClient', () => {
       const anthropicClient = client.getClient();
       expect(anthropicClient._options.defaultHeaders).toBeUndefined();
     });
+
+    it('should configure timeout from options', () => {
+      const client = new AnthropicClient('test-api-key');
+      client.setOptions({
+        modelOptions: {
+          model: 'claude-3-opus-20240229',
+        },
+        timeout: 30000,
+      });
+      const anthropicClient = client.getClient();
+      expect(anthropicClient._options.timeout).toBe(30000);
+    });
+
+    it('should use default timeout when not specified', () => {
+      const client = new AnthropicClient('test-api-key');
+      client.setOptions({
+        modelOptions: {
+          model: 'claude-3-opus-20240229',
+        },
+      });
+      const anthropicClient = client.getClient();
+      expect(anthropicClient._options.timeout).toBe(600000);
+    });
+
+    it('should use environment variable timeout when options not specified', () => {
+      const originalTimeout = process.env.ANTHROPIC_TIMEOUT;
+      process.env.ANTHROPIC_TIMEOUT = '120000';
+      
+      const client = new AnthropicClient('test-api-key');
+      client.setOptions({
+        modelOptions: {
+          model: 'claude-3-opus-20240229',
+        },
+      });
+      const anthropicClient = client.getClient();
+      expect(anthropicClient._options.timeout).toBe(120000);
+      
+      if (originalTimeout) {
+        process.env.ANTHROPIC_TIMEOUT = originalTimeout;
+      } else {
+        delete process.env.ANTHROPIC_TIMEOUT;
+      }
+    });
   });
 
   describe('calculateCurrentTokenCount', () => {

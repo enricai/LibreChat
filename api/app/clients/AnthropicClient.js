@@ -197,6 +197,12 @@ class AnthropicClient extends BaseClient {
       options.fetchOptions.agent = new HttpsProxyAgent(this.options.proxy);
     }
 
+    // Configure timeout - default to 10 minutes (600000ms) if not specified
+    const timeout = this.options.timeout ?? process.env.ANTHROPIC_TIMEOUT ?? 600000;
+    if (timeout && !isNaN(Number(timeout))) {
+      options.timeout = Number(timeout);
+    }
+
     if (this.options.reverseProxyUrl) {
       options.baseURL = this.options.reverseProxyUrl;
     }
