@@ -139,6 +139,7 @@ const AttachFileMenu = ({ disabled, conversationId, endpointFileConfig }: Attach
     setEphemeralAgent,
     sharePointEnabled,
     setIsSharePointDialogOpen,
+    handleUploadClick,
   ]);
 
   const menuTrigger = (
