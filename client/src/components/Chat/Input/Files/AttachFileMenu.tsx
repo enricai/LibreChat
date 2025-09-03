@@ -121,7 +121,7 @@ const AttachFileMenu = ({
       }
     }
 
-    if (capabilities.fileSearchEnabled && endpoint !== EModelEndpoint.anthropic) {
+    if (capabilities.fileSearchEnabled) {
       items.push({
         label: localize('com_ui_upload_file_search'),
         onClick: () => {
