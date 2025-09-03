@@ -1,7 +1,14 @@
 import { visit } from 'unist-util-visit';
 import type { Node } from 'unist';
 import type { Citation, CitationNode } from './types';
-import { SPAN_REGEX, STANDALONE_PATTERN, CLEANUP_REGEX, COMPOSITE_REGEX } from '~/utils/citations';
+import {
+  SPAN_REGEX,
+  STANDALONE_PATTERN,
+  CLEANUP_REGEX,
+  COMPOSITE_REGEX,
+  CORRUPTED_CITATION_REGEX,
+  CORRUPTED_CHAR_CLEANUP_REGEX
+} from '~/utils/citations';
 
 /**
  * Checks if a standalone marker is truly standalone (not inside a composite block)
@@ -75,6 +82,22 @@ function findNextMatch(
   return { type: matchType, match: nextMatch, index: typeIndex };
 }
 
+/**
+ * Converts corrupted citation markers back to proper Unicode format
+ */
+function fixCorruptedCitations(text: string): string {
+  // Convert corrupted markers like ㅇ2202turn0search1 back to \ue202turn0search1
+  let result = text.replace(CORRUPTED_CITATION_REGEX, (match, unicodeCode, citationPart) => {
+    const unicodeChar = String.fromCharCode(parseInt('e' + unicodeCode.slice(1), 16));
+    return `${unicodeChar}${citationPart}`;
+  });
+
+  // Clean up any remaining Korean characters
+  result = result.replace(CORRUPTED_CHAR_CLEANUP_REGEX, '');
+
+  return result;
+}
+
 function processTree(tree: Node) {
   visit(tree, 'text', (node, index, parent) => {
     const textNode = node as CitationNode;
@@ -82,7 +105,9 @@ function processTree(tree: Node) {
 
     if (typeof textNode.value !== 'string') return;
 
-    const originalValue = textNode.value;
+    // First, fix any corrupted citation markers
+    const fixedValue = fixCorruptedCitations(textNode.value);
+    const originalValue = fixedValue;
     const segments: Array<CitationNode> = [];
 
     // Single-pass processing through the string

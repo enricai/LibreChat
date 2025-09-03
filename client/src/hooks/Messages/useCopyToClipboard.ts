@@ -8,6 +8,8 @@ import {
   COMPOSITE_REGEX,
   STANDALONE_PATTERN,
   INVALID_CITATION_REGEX,
+  CORRUPTED_CITATION_REGEX,
+  CORRUPTED_CHAR_CLEANUP_REGEX,
 } from '~/utils/citations';
 
 type Source = {
@@ -107,9 +109,28 @@ export default function useCopyToClipboard({
 }
 
 /**
+ * Fixes corrupted citation markers in text
+ */
+function fixCorruptedCitations(text: string): string {
+  // Convert corrupted markers like ㅇ2202turn0search1 back to \ue202turn0search1
+  let result = text.replace(CORRUPTED_CITATION_REGEX, (match, unicodeCode, citationPart) => {
+    const unicodeChar = String.fromCharCode(parseInt('e' + unicodeCode.slice(1), 16));
+    return `${unicodeChar}${citationPart}`;
+  });
+
+  // Clean up any remaining Korean characters
+  result = result.replace(CORRUPTED_CHAR_CLEANUP_REGEX, '');
+
+  return result;
+}
+
+/**
  * Process citations in the text and format them properly
  */
 function processCitations(text: string, searchResults: { [key: string]: SearchResultData }) {
+  // First, fix any corrupted citation markers
+  const cleanedText = fixCorruptedCitations(text);
+
   // Maps citation keys to their info including reference numbers
   const citations = new Map<
     string,
@@ -125,7 +146,7 @@ function processCitations(text: string, searchResults: { [key: string]: SearchRe
   const urlToCitationKey = new Map<string, string>();
 
   let nextReferenceNumber = 1;
-  let formattedText = text;
+  let formattedText = cleanedText;
 
   // Step 1: Process highlighted text first (simplify by just making it bold in markdown)
   formattedText = formattedText.replace(SPAN_REGEX, (match) => {
